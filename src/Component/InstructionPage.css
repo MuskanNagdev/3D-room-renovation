@@ -1,0 +1,100 @@
+/* InstructionPage.css */
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  /* Header styles */
+  .headerinstruction {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Main styles */
+  .Instructionbody {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(45deg, #fff 25%, #f2f2f2 25%, #f2f2f2 50%, #fff 50%, #fff 75%, #f2f2f2 75%, #f2f2f2 100%);
+    background-size: 40px 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  /* Title styles */
+  .instruction-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  /* List styles */
+  .instruction-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .instruction-list li {
+    margin-bottom: 20px;
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .instruction-list li:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  /* Icon styles */
+  .instruction-list li i {
+    font-size: 24px;
+    color: #007bff;
+    margin-right: 15px;
+  }
+  
+  .instruction-list li span {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.6;
+  }
+  
+  /* Footer styles */
+  .Instructionfooter {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Color and Font Size for Paid Designs */
+  .instruction-list li i.fa-money-bill-wave {
+    color: #28a745; /* Green color for paid designs */
+    font-size: 24px;
+  }
+  
+  /* Color and Font Size for Free Designs */
+  .instruction-list li i.fa-gift {
+    color: #dc3545; /* Red color for free designs */
+    font-size: 24px;
+  }
+  

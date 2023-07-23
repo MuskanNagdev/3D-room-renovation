@@ -22,9 +22,8 @@ import Parameter from './Component/Parameter';
 import Feedback from './Component/Feedback';
 import Payment from './Component/Payment';
 import Thankyou from './Component/Thankyou';
-import fetch from './Component/fetch';
+import Fetch from './Component/Fetch';
 import Faq from './Component/Faq';
-// import Dashboard from './Component/Dashboard';
 import Admin from './Component/Admin';
 import settings from   './Component/settings';
 import UsernameSettings from './Component/UsernameSettings';
@@ -32,6 +31,8 @@ import PasswordSettings from './Component/PasswordSettings';
 import LanguageSettings from './Component/LanguageSettings';
 import ColorSettings from './Component/ColorSettings';
 import Designerpage from  './Component/Designerpage';
+import InstructionPage from './Component/Instruction'; // Update the import statement
+
 const App = () => {
   return (
    <Router>
@@ -60,8 +61,9 @@ const App = () => {
         <Route path="/parameter" exact Component={Parameter}/>
         <Route path="/feedback" exact Component={Feedback}/>
         <Route path="/payment" exact Component={Payment}/>
-        <Route path="/fetch" exact Component={fetch}/>
-        {/* <Route path="/dashboard" exact Component={Dashboard}/> */}
+        <Route path="/instruction" element={<InstructionPage />} /> {/* Use element instead of Component */}
+
+        <Route path="/Fetch" exact Component={Fetch}/>
         <Route path="/admin" exact Component={Admin}/>
         <Route path="/settings" exact Component={settings}/>
         <Route path="/usernamesettings" exact Component={UsernameSettings}/>

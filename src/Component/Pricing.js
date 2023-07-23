@@ -55,7 +55,7 @@ function PricingPage() {
               </li>
             ))}
           </ul>
-          <NavLink to="/Paymnet"> <button onClick={() => handlePayment('paid')}>Subscribe</button></NavLink>
+          <NavLink to="/Payment"> <button onClick={() => handlePayment('paid')}>Subscribe</button></NavLink>
         </div>
       </div>
     </div>

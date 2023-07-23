@@ -8,10 +8,14 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { event } from 'jquery';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 
+
 function CustomDesign() {
   const [color, setColor] = useState("#ffffff");
   const canvasRef = useRef(null);
+
   let loader;
+  // loader = new GLTFLoader();
+  let progress=0;
   var scene;
   var renderer;
   var camera;
@@ -25,7 +29,7 @@ function CustomDesign() {
   var opositewall;
   var doorandwindows;
   var otherObjects = true;
-  var deleteObject;
+  var deleteObject = null;
   var light5;
   var roofColorObj;
   var frontWallBox;
@@ -85,9 +89,7 @@ function CustomDesign() {
           doorandwindows = group;
           otherObjects = false;
           obj.add(group);
-          if (isObjectInFrustum(group)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -112,9 +114,7 @@ function CustomDesign() {
           doorandwindows = group;
           otherObjects = false;
           obj.add(group);
-          if (isObjectInFrustum(group)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -139,9 +139,7 @@ function CustomDesign() {
           doorandwindows = group;
           otherObjects = false;
           obj.add(group);
-          if (isObjectInFrustum(group)) {
-            animate();
-          }
+          animate();
         });
   
         },
@@ -166,9 +164,7 @@ function CustomDesign() {
           doorandwindows = group;
           otherObjects = false;
           obj.add(group);
-          if (isObjectInFrustum(group)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -193,9 +189,7 @@ function CustomDesign() {
           doorandwindows = group;
           otherObjects = false;
           obj.add(group);
-          if (isObjectInFrustum(group)) {
-            animate();
-          }
+          animate();
         });
         
         },
@@ -207,7 +201,7 @@ function CustomDesign() {
       items: [{
         name: "Woodpaper Window",
         clickHandler: () => {console.log("Loading Item 1 under window")
-        loader.load('Models/window/1/Project Name.gltf',function(gltf){
+        loader.load('Models/window/1/Project Name.glb',function(gltf){
           const windowMesh = gltf.scene;
           console.log("windowmesh:"+windowMesh);
           windowMesh.scale.x = 4;
@@ -224,9 +218,7 @@ function CustomDesign() {
           doorandwindows = group;
           otherObjects = false;
           obj.add(group);
-          if (isObjectInFrustum(group)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -251,9 +243,7 @@ function CustomDesign() {
           doorandwindows = group;
           otherObjects = false;
           obj.add(group);
-          if (isObjectInFrustum(group)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -278,9 +268,7 @@ function CustomDesign() {
           doorandwindows = group;
           otherObjects = false;
           obj.add(group);
-          if (isObjectInFrustum(group)) {
-            animate();
-          }
+          animate();
         });
   
         },
@@ -303,9 +291,7 @@ function CustomDesign() {
           group.add(windowMesh);
           group.add(window2);
           obj.add(group);
-          if (isObjectInFrustum(group)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -330,9 +316,7 @@ function CustomDesign() {
           doorandwindows = group;
           otherObjects = false;
           obj.add(group);
-          if (isObjectInFrustum(group)) {
-            animate();
-          }
+          animate();
         });
         
         },
@@ -344,7 +328,7 @@ function CustomDesign() {
       items: [{
         name: "Blue Cushion Chair",
         clickHandler: () => {console.log("Loading Item 1 under Chair")
-        loader.load('Models/Chairs/Project chair1.gltf.glb',function(gltf){
+        loader.load('Models/Chairs/1/Project Name.glb',function(gltf){
           console.log(gltf);
           var chair = gltf.scene;
           chair.traverse(function(child){
@@ -359,42 +343,15 @@ function CustomDesign() {
           movingObject = chair;
           otherObjects = true;
           scene.add(chair);
-          if (isObjectInFrustum(chair)) {
-            animate();
-          }
+          progress = progress+5;
+          animate();
         });
-      
-        },
-      },
-      {
-        name: "Black Cushion Chair",
-        clickHandler: () => {console.log("Loading Item 2 under Chair")
-        loader.load('Models/Chairs/Project chair2.gltf.glb',function(gltf){
-          console.log(gltf);
-          var chair = gltf.scene;
-          chair.traverse(function(child){
-            child.userData.selectable = true;
-            child.layers.set(0);
-          });
-          chair.scale.x =50;
-          chair.scale.y =50;
-          chair.scale.z =50;
-          chair.position.z += 10;
-          chair.rotateY(-Math.PI/2);
-          movingObject = chair;
-          otherObjects = true;
-          scene.add(chair);
-          if (isObjectInFrustum(chair)) {
-            animate();
-          }
-        });
-      
         },
       },
       {
         name: "Sofa Inherited Chair",
         clickHandler: () => {console.log("Loading Item 3 under Chair")
-        loader.load('Models/Chairs/Project chair 3.gltf.glb',function(gltf){
+        loader.load('Models/Chairs/2/Project Name.glb',function(gltf){  
           console.log(gltf);
           var chair = gltf.scene;
           chair.traverse(function(child){
@@ -409,17 +366,15 @@ function CustomDesign() {
           movingObject = chair;
           otherObjects = true;
           scene.add(chair);
-          if (isObjectInFrustum(chair)) {
-            animate();
-          }
+          animate();
         });
   
-        },
+        }, 
       },
       {
         name: "Relaxing Wood Chair",
         clickHandler: () => {console.log("Loading Item 4 under Chair")
-        loader.load('Models/Chairs/Project chair 4/Project Name.gltf',function(gltf){
+        loader.load('Models/Chairs/3/Project Name.gltf',function(gltf){
           console.log(gltf);
           var chair = gltf.scene;
           chair.traverse(function(child){
@@ -434,36 +389,9 @@ function CustomDesign() {
           movingObject = chair;
           otherObjects = true;
           scene.add(chair);
-          if (isObjectInFrustum(chair)) {
-            animate();
-          }
+          animate();
         });
       
-        },
-      },
-      {
-        name: "Couple Chairs",
-        clickHandler: () => {console.log("Loading Item 5 under Chair")
-        loader.load('Models/Chairs/Project chair_5/Project Name.gltf',function(gltf){
-          console.log(gltf);
-          var chair = gltf.scene;
-          chair.traverse(function(child){
-            child.userData.selectable = true;
-            child.layers.set(0);
-          });
-          chair.scale.x =500;
-          chair.scale.y =500;
-          chair.scale.z =500;
-          chair.position.z += 10;
-          chair.rotateY(-Math.PI/2);
-          movingObject = chair;
-          otherObjects = true;
-          scene.add(chair);
-          if (isObjectInFrustum(chair)) {
-            animate();
-          }
-        });
-        
         },
       },
       ]
@@ -473,7 +401,7 @@ function CustomDesign() {
       items: [{
         name: "Dark Brown Wood Table",
         clickHandler: () => {console.log("Loading Item 1 under Table")
-        loader.load('Models/table/table 1/Project Name.gltf',function(gltf){
+        loader.load('Models/table/table 1/Project Name.glb',function(gltf){
           console.log(gltf);
           var table = gltf.scene;
           table.traverse(function(child){
@@ -488,9 +416,7 @@ function CustomDesign() {
           movingObject = table;
           otherObjects = true;
           scene.add(table);
-          if (isObjectInFrustum(table)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -498,7 +424,7 @@ function CustomDesign() {
       {
         name: "Painted Table",
         clickHandler: () => {console.log("Loading Item 2 under Table")
-        loader.load('Models/table/table 2/Project Name.gltf',function(gltf){
+        loader.load('Models/table/table 2/Project Name.glb',function(gltf){
           console.log(gltf);
           var table = gltf.scene;
           table.traverse(function(child){
@@ -513,9 +439,7 @@ function CustomDesign() {
           movingObject = table;
           otherObjects = true;
           scene.add(table);
-          if (isObjectInFrustum(table)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -538,9 +462,7 @@ function CustomDesign() {
           movingObject = table;
           otherObjects = true;
           scene.add(table);
-          if (isObjectInFrustum(table)) {
-            animate();
-          }
+          animate();
         });
   
         },
@@ -563,9 +485,7 @@ function CustomDesign() {
           movingObject = table;
           otherObjects = true;
           scene.add(table);
-          if (isObjectInFrustum(table)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -588,9 +508,7 @@ function CustomDesign() {
           movingObject = table;
           otherObjects = true;
           scene.add(table);
-          if (isObjectInFrustum(table)) {
-            animate();
-          }
+          animate();
         });
         
         },
@@ -602,7 +520,7 @@ function CustomDesign() {
       items: [{
         name: "Blue Dinning Table With Light",
         clickHandler: () => {console.log("Loading Item 1 under Dinning Table")
-        loader.load('Models/dinning table/1/Project Name.gltf',function(gltf){
+        loader.load('Models/dinning table/1/Project Name.glb',function(gltf){
           console.log(gltf);
           var dinningTable = gltf.scene;
           dinningTable.traverse(function(child){
@@ -617,89 +535,15 @@ function CustomDesign() {
           movingObject = dinningTable;
           otherObjects = true;
           scene.add(dinningTable);
-          if (isObjectInFrustum(dinningTable)) {
-            animate();
-          }
+          animate();
         });
-      
-        },
-      },
-      {
-        name: "4 Person Dinning Table",
-        clickHandler: () => {console.log("Loading Item 2 under Dinning Table")
-        loader.load('Models/dinning table/2/Project Name.gltf',function(gltf){
-          console.log(gltf);
-          var dinningTable = gltf.scene;
-          dinningTable.traverse(function(child){
-            child.userData.selectable = true;
-            child.layers.set(0);
-          });
-          dinningTable.scale.x =22;
-          dinningTable.scale.y =22;
-          dinningTable.scale.z =22;
-          dinningTable.position.z += 10;
-          dinningTable.rotateY(-Math.PI/2);
-          movingObject = dinningTable;
-          otherObjects = true;
-          scene.add(dinningTable);
-          if (isObjectInFrustum(dinningTable)) {
-            animate();
-          }
-        });
-      
-        },
-      },
-      {
-        name: "Dark Blue 4 Person Dinning Table",
-        clickHandler: () => {console.log("Loading Item 3 under Dinning Table")
-        loader.load('Models/dinning table/3/Project Name.gltf',function(gltf){
-          console.log(gltf);
-          var dinningTable = gltf.scene;
-          dinningTable.traverse(function(child){
-            child.userData.selectable = true;
-            child.layers.set(0);
-          });
-          dinningTable.scale.x =22;
-          dinningTable.scale.y =22;
-          dinningTable.scale.z =22;
-          dinningTable.position.z += 10;
-          dinningTable.rotateY(-Math.PI/2);
-          movingObject = dinningTable;
-          otherObjects = true;
-          scene.add(dinningTable);
-          if (isObjectInFrustum(dinningTable)) {
-            animate();
-          }
-        });
-  
-        },
-      },
-      {
-        name: "Adjustible Dinning Table",
-        clickHandler: () => {console.log("Loading Item 4 under Dinning Table")
-        // loader.load('Models/cupboard/4/Project Name (1)/Project Name.gltf',function(gltf){
-        //   console.log(gltf);
-        //   var cupboard = gltf.scene;
-        //   cupboard.traverse(function(child){
-        //     child.userData.selectable = true;
-        //     child.layers.set(0);
-        //   });
-        //   cupboard.scale.x =30;
-        //   cupboard.scale.y =30;
-        //   cupboard.scale.z =30;
-        //   cupboard.position.z += 10;
-        //   cupboard.rotateY(-Math.PI/2);
-        //   movingObject = cupboard;
-        //   scene.add(cupboard);
-        //   animate();
-        // });
       
         },
       },
       {
         name: "4 Person Plan Dinning Table",
         clickHandler: () => {console.log("Loading Item 5 under Dinning Table")
-        loader.load('Models/dinning table/5/Project Name.gltf',function(gltf){
+        loader.load('Models/dinning table/5/Project Name.glb',function(gltf){
           console.log(gltf);
           var dinningTable = gltf.scene;
           dinningTable.traverse(function(child){
@@ -714,9 +558,7 @@ function CustomDesign() {
           movingObject = dinningTable;
           otherObjects = true;
           scene.add(dinningTable);
-          if (isObjectInFrustum(dinningTable)) {
-            animate();
-          }
+          animate();
         });
         
         },
@@ -743,9 +585,7 @@ function CustomDesign() {
           movingObject = cupboard;
           otherObjects = true;
           scene.add(cupboard);
-          if (isObjectInFrustum(cupboard)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -768,9 +608,7 @@ function CustomDesign() {
           movingObject = cupboard;
           otherObjects = true;
           scene.add(cupboard);
-          if (isObjectInFrustum(cupboard)) {
-            animate();
-          }
+          animate();
         });
       
         },
@@ -793,61 +631,9 @@ function CustomDesign() {
           movingObject = cupboard;
           otherObjects = true;
           scene.add(cupboard);
-          if (isObjectInFrustum(cupboard)) {
-            animate();
-          }
+          animate();
         });
   
-        },
-      },
-      {
-        name: "Black Shaded Cupboard",
-        clickHandler: () => {console.log("Loading Item 4 under cubboard")
-        loader.load('Models/cupboard/4/Project Name (1)/Project Name.gltf',function(gltf){
-          console.log(gltf);
-          var cupboard = gltf.scene;
-          cupboard.traverse(function(child){
-            child.userData.selectable = true;
-            child.layers.set(0);
-          });
-          cupboard.scale.x =30;
-          cupboard.scale.y =30;
-          cupboard.scale.z =30;
-          cupboard.position.z += 10;
-          cupboard.rotateY(-Math.PI/2);
-          movingObject = cupboard;
-          otherObjects = true;
-          scene.add(cupboard);
-          if (isObjectInFrustum(cupboard)) {
-            animate();
-          }
-        });
-      
-        },
-      },
-      {
-        name: "Dark Blue Shaded Cupboard",
-        clickHandler: () => {console.log("Loading Item 5 under cubboard")
-        loader.load('Models/cupboard/5/Project Name/Project Name.gltf',function(gltf){
-          console.log(gltf);
-          var cupboard = gltf.scene;
-          cupboard.traverse(function(child){
-            child.userData.selectable = true;
-            child.layers.set(0);
-          });
-          cupboard.scale.x =30;
-          cupboard.scale.y =30;
-          cupboard.scale.z =30;
-          cupboard.position.z += 10;
-          cupboard.rotateY(-Math.PI/2);
-          movingObject = cupboard;
-          otherObjects = true;
-          scene.add(cupboard);
-          if (isObjectInFrustum(cupboard)) {
-            animate();
-          }
-        });
-        
         },
       },
       ]
@@ -872,9 +658,7 @@ function CustomDesign() {
         movingObject = bed;
         otherObjects = true;
         scene.add(bed);
-        if (isObjectInFrustum(bed)) {
-          animate();
-        }
+        animate();
       });
     
       },
@@ -897,10 +681,7 @@ function CustomDesign() {
         movingObject = bed;
         otherObjects = true;
         scene.add(bed);
-
-        if (isObjectInFrustum(bed)) {
-          animate();
-        }
+        animate();
       });
     
       },
@@ -923,9 +704,7 @@ function CustomDesign() {
         movingObject = bed;
         otherObjects = true;
         scene.add(bed);
-        if (isObjectInFrustum(bed)) {
-          animate();
-        }
+        animate();
       });
 
       },
@@ -948,9 +727,7 @@ function CustomDesign() {
         movingObject = bed;
         otherObjects = true;
         scene.add(bed);
-        if (isObjectInFrustum(bed)) {
-          animate();
-        }
+        animate();
       });
     
       },
@@ -973,9 +750,7 @@ function CustomDesign() {
         movingObject = bed;
         otherObjects = true;
         scene.add(bed);
-        if (isObjectInFrustum(bed)) {
-          animate();
-        }
+        animate();
       });
       
       },
@@ -985,14 +760,10 @@ function CustomDesign() {
   {
     name: "floor",
     items: [{
-      name: "Sky Blue Floor",
-      clickHandler: () =>{ console.log("Loading Item 1 under floor")},
-    },
-    {
       name: "Black Sheet Patern Floor",
       clickHandler: () => {console.log("Loading Item 2 under floor")
     
-      loader.load('Models/floor/2/Project Name/Project Name.gltf',function(gltf){
+      loader.load('Models/floor/2/Project Name.glb',function(gltf){
         console.log(gltf);
         floor = gltf.scene;
         floor.position.z = floorPosition+4;
@@ -1006,9 +777,7 @@ function CustomDesign() {
                    } );
                    otherObjects = true;
         scene.add(floor);
-        if (isObjectInFrustum(floor)) {
-          animate();
-        }
+        animate();
       });
       
       },
@@ -1016,7 +785,7 @@ function CustomDesign() {
     {
       name: "Brown Tiled Floor",
       clickHandler: () => {console.log("Loading Item 3 under floor")
-      loader.load('Models/floor/3/Project Name/Project Name.gltf',function(gltf){
+      loader.load('Models/floor/3/Project Name.glb',function(gltf){
         console.log(gltf);
         floor = gltf.scene;
         floor.position.z = floorPosition+4;
@@ -1030,9 +799,7 @@ function CustomDesign() {
                    } );
                    otherObjects = true;
         scene.add(floor);
-        if (isObjectInFrustum(floor)) {
-          animate();
-        }
+        animate();
       });
     
       },
@@ -1040,7 +807,7 @@ function CustomDesign() {
     {
       name: "Plan Floor",
       clickHandler: () => {console.log("Loading Item 4 under bed")
-      loader.load('Models/floor/4/Project Name/Project Name.gltf',function(gltf){
+      loader.load('Models/floor/4/Project Name.glb',function(gltf){
         console.log(gltf);
         floor = gltf.scene;
         floor.position.z = floorPosition+4;
@@ -1054,9 +821,7 @@ function CustomDesign() {
                    } );
                    otherObjects = true;
         scene.add(floor);
-        if (isObjectInFrustum(floor)) {
-          animate();
-        }
+        animate();
       });
       
       },
@@ -1064,7 +829,7 @@ function CustomDesign() {
     {
       name: "Blue Wood Patern Floor",
       clickHandler: () => {console.log("Loading Item 5 under bed")
-      loader.load('Models/floor/5/Project Name.gltf',function(gltf){
+      loader.load('Models/floor/5/Project Name.glb',function(gltf){
         console.log(gltf);
         floor = gltf.scene;
         floor.position.z = floorPosition+4;
@@ -1078,9 +843,7 @@ function CustomDesign() {
                    } );
                    otherObjects = true;
         scene.add(floor);
-        if (isObjectInFrustum(floor)) {
-          animate();
-        }
+        animate();
       });
     
       },
@@ -1092,7 +855,7 @@ function CustomDesign() {
     items: [{
       name: "Plan Pattern Roof",
       clickHandler: () => {console.log("Loading Item 1 under roof")
-      loader.load('Models/roof1/Project Name/Project Name.gltf',function(gltf){
+      loader.load('Models/roof1/Project Name/Project Name.glb',function(gltf){
         console.log(gltf);
         const roof = gltf.scene;
         roof.position.z = floorPosition;
@@ -1110,9 +873,7 @@ function CustomDesign() {
         otherObjects = true;
         roofColorObj = roof;
         scene.add(roof);
-        if (isObjectInFrustum(roof)) {
-          animate();
-        }
+        animate();
       });
       },
     },
@@ -1268,6 +1029,8 @@ function CustomDesign() {
 
   
     animate();
+
+
 
     // add mouse listener here
     function onKeyDown(event) {
@@ -1526,15 +1289,403 @@ function CustomDesign() {
     function onDeleteButtonClick(event) {
       // Do something when the delete button is clicked
       console.log("delete is clicked");
-      deleteObject.removeFromParent();
-      if (isObjectInFrustum(deleteObject)) {
-        animate();
+      if(deleteObject == null){
+        // do nothing
+      } else{
+        deleteObject.removeFromParent();
+        if (isObjectInFrustum(deleteObject)) {
+          animate();
+        }
       }
     }
 
-  
+    // adding manual listeners
+    var leftMovement = document.getElementById('moveLeft');
+    leftMovement.addEventListener('click',moveLeft);
 
-    
+    function moveLeft(){
+      if(otherObjects === true){ 
+        movingObject.position.x -= 0.5;
+        if (isObjectInFrustum(movingObject)) {
+          animate();
+        }
+      } else {
+        const doorAndWindowBox = new THREE.Box3().setFromObject(doorandwindows);
+        if(frontWallCheck){
+          if(doorAndWindowBox.intersectsBox(rightwallBox)){
+            console.log("Collision with right wall detected");
+            frontWallCheck = false;
+            rightwallCheck = true;
+            obj.remove(doorandwindows);
+            rightwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.x += 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          if(doorAndWindowBox.intersectsBox(lefttwallBox)){
+            console.log("Collision with left wall detected");
+            frontWallCheck = false;
+            lefttwallCheck = true;
+            obj.remove(doorandwindows);
+            lefttwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.x -= 0.05
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          } 
+          doorandwindows.position.x -= 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+        if(rightwallCheck){
+          if(doorAndWindowBox.intersectsBox(opositewallBox)){
+            console.log("Collision with opposite wall detected");
+            rightwallCheck = false;
+            opositewallCheck = true;
+            rightwall.remove(doorandwindows);
+            opositewall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.x += 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          doorandwindows.position.x += 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          } 
+        }
+        if(opositewallCheck){
+          if(doorAndWindowBox.intersectsBox(lefttwallBox)){
+            console.log("Collision with left wall detected");
+            opositewallCheck = false;
+            lefttwallCheck = true;
+            opositewall.remove(doorandwindows);
+            lefttwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.x += 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          doorandwindows.position.x -= 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+        if(lefttwallCheck){
+          doorandwindows.position.x += 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+      }
+
+    }
+
+    var rotateR = document.getElementById('rotateRight');
+    rotateR.addEventListener('click',roateRight);
+    function roateRight(){
+      if(otherObjects === true){
+        movingObject.rotation.y -= 0.05;
+          if (isObjectInFrustum(movingObject)) {
+            animate();
+          }
+      }
+    }
+
+    var rotateL = document.getElementById('rotateLeft');
+    rotateL.addEventListener('click',roateLeft);
+    function roateLeft(){
+      if(otherObjects === true){
+        movingObject.rotation.y += 0.05;
+          if (isObjectInFrustum(movingObject)) {
+            animate();
+          }
+      }
+    }
+
+    var leftMovement = document.getElementById('moveDown');
+    leftMovement.addEventListener('click',moveDown);
+
+    function moveDown(){
+      if(otherObjects === true){ 
+        movingObject.position.z += 0.5;
+        if (isObjectInFrustum(movingObject)) {
+          animate();
+        }
+      } else {
+        const doorAndWindowBox = new THREE.Box3().setFromObject(doorandwindows);
+        if(frontWallCheck){
+          if(doorAndWindowBox.intersectsBox(rightwallBox)){
+            console.log("Collision with right wall detected");
+            frontWallCheck = false;
+            rightwallCheck = true;
+            obj.remove(doorandwindows);
+            rightwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.y -= 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          if(doorAndWindowBox.intersectsBox(lefttwallBox)){
+            console.log("Collision with left wall detected");
+            frontWallCheck = false;
+            lefttwallCheck = true;
+            obj.remove(doorandwindows);
+            lefttwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.y += 0.05
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          } 
+          doorandwindows.position.y += 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+        if(rightwallCheck){
+          if(doorAndWindowBox.intersectsBox(opositewallBox)){
+            console.log("Collision with opposite wall detected");
+            rightwallCheck = false;
+            opositewallCheck = true;
+            rightwall.remove(doorandwindows);
+            opositewall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.y -= 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          doorandwindows.position.y -= 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          } 
+        }
+        if(opositewallCheck){
+          if(doorAndWindowBox.intersectsBox(lefttwallBox)){
+            console.log("Collision with left wall detected");
+            opositewallCheck = false;
+            lefttwallCheck = true;
+            opositewall.remove(doorandwindows);
+            lefttwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.y -= 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          doorandwindows.position.y += 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+        if(lefttwallCheck){
+          doorandwindows.position.y -= 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+      }
+
+    }
+
+
+    var leftMovement = document.getElementById('moveUp');
+    leftMovement.addEventListener('click',moveUp);
+
+    function moveUp(){
+      if(otherObjects === true){ 
+        movingObject.position.z -= 0.5;
+        if (isObjectInFrustum(movingObject)) {
+          animate();
+        }
+      } else {
+        const doorAndWindowBox = new THREE.Box3().setFromObject(doorandwindows);
+        if(frontWallCheck){
+          if(doorAndWindowBox.intersectsBox(rightwallBox)){
+            console.log("Collision with right wall detected");
+            frontWallCheck = false;
+            rightwallCheck = true;
+            obj.remove(doorandwindows);
+            rightwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.y += 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          if(doorAndWindowBox.intersectsBox(lefttwallBox)){
+            console.log("Collision with left wall detected");
+            frontWallCheck = false;
+            lefttwallCheck = true;
+            obj.remove(doorandwindows);
+            lefttwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.y -= 0.05
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          } 
+          doorandwindows.position.y -= 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+        if(rightwallCheck){
+          if(doorAndWindowBox.intersectsBox(opositewallBox)){
+            console.log("Collision with opposite wall detected");
+            rightwallCheck = false;
+            opositewallCheck = true;
+            rightwall.remove(doorandwindows);
+            opositewall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.y += 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          doorandwindows.position.y += 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          } 
+        }
+        if(opositewallCheck){
+          if(doorAndWindowBox.intersectsBox(lefttwallBox)){
+            console.log("Collision with left wall detected");
+            opositewallCheck = false;
+            lefttwallCheck = true;
+            opositewall.remove(doorandwindows);
+            lefttwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.y += 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          doorandwindows.position.y -= 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+        if(lefttwallCheck){
+          doorandwindows.position.y += 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+      }
+
+    }
+
+    var leftMovement = document.getElementById('moveRight');
+    leftMovement.addEventListener('click',moveRight);
+
+    function moveRight(){
+      if(otherObjects === true){ 
+        movingObject.position.x += 0.5;
+        if (isObjectInFrustum(movingObject)) {
+          animate();
+        }
+      } else {
+        const doorAndWindowBox = new THREE.Box3().setFromObject(doorandwindows);
+        if(frontWallCheck){
+          if(doorAndWindowBox.intersectsBox(rightwallBox)){
+            console.log("Collision with right wall detected");
+            frontWallCheck = false;
+            rightwallCheck = true;
+            obj.remove(doorandwindows);
+            rightwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.x -= 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          if(doorAndWindowBox.intersectsBox(lefttwallBox)){
+            console.log("Collision with left wall detected");
+            frontWallCheck = false;
+            lefttwallCheck = true;
+            obj.remove(doorandwindows);
+            lefttwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.x += 0.05
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          } 
+          doorandwindows.position.x += 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+        if(rightwallCheck){
+          if(doorAndWindowBox.intersectsBox(opositewallBox)){
+            console.log("Collision with opposite wall detected");
+            rightwallCheck = false;
+            opositewallCheck = true;
+            rightwall.remove(doorandwindows);
+            opositewall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.x -= 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          doorandwindows.position.x -= 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          } 
+        }
+        if(opositewallCheck){
+          if(doorAndWindowBox.intersectsBox(lefttwallBox)){
+            console.log("Collision with left wall detected");
+            opositewallCheck = false;
+            lefttwallCheck = true;
+            opositewall.remove(doorandwindows);
+            lefttwall.add(doorandwindows);
+            doorandwindows.rotateY(Math.PI);
+            doorandwindows.x -= 0.05;
+            if (isObjectInFrustum(doorandwindows)) {
+              animate();
+            }
+          }
+          doorandwindows.position.x += 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+        if(lefttwallCheck){
+          doorandwindows.position.x -= 0.05;
+          //console.log("door and window position :"+ doorandwindows.position.x);
+          if (isObjectInFrustum(doorandwindows)) {
+            animate();
+          }
+        }
+      }
+
+    }
 
     document.addEventListener('keydown', onKeyDown, false);
 
@@ -1620,41 +1771,7 @@ function CustomDesign() {
     });
        
     
-    var colorPickerObject = document.getElementById('color-picker-object');
-    // Add an event listener to the color picker
-    colorPickerObject.addEventListener('input', function() {
-      // Retrieve the selected color value
-      var hexColor = colorPickerObject.value;
-      // Do something with the hex color value
-      console.log('Selected color:', hexColor);
-      if(otherObjects === true){
-        if(deleteObject === null){
-          console.log("Object is not selected");
-        } else {
-          deleteObject.traverse( ( object ) => {
-          if ( object.isMesh ) {
-              object.material.color.set( new THREE.Color(hexColor) );
-          }
-          } );
-        }
-      } else {
-        if(doorandwindows === null){
-          console.log("Object is not selected ");
-        } else {
-          doorandwindows.traverse( ( object ) => {
-          if ( object.isMesh ) {
-              object.material.color.set( new THREE.Color(hexColor) );
-          }
-          } );
-        }
-      }
-      if (isObjectInFrustum(deleteObject)) {
-        animate();
-      }
-      if (isObjectInFrustum(doorandwindows)) {
-        animate();
-      }
-    });
+    
 
 
     var colorPickerFloor = document.getElementById('color-picker-floor');
@@ -1719,77 +1836,83 @@ function CustomDesign() {
 
   return (
     <Container fluid>
-  <Row>
-    {/* Left Sidebar */}
-    <Col md={3} lg={2} className="left-sidebar">
-      <div className="left-sidebar-container">
-        <div className="arrow-icon"></div>
-        <div className="search-container">
-          <Form>
-            <Form.Control type="text" placeholder="Search" className="search-box" />
-            <Button variant="light" className="search-btn">
-              Search
-            </Button>
-          </Form>
-          <hr className="search-hr" />
-          {arr.map((item, i) => (
-              <Dropdown key={i} className="dropdown">
-                <Dropdown.Toggle variant="secondary" block>
-                  {item.name}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {item.items.map((dropItem, ind) => (
-                    <Dropdown.Item key={ind} onClick={() => {dropItem.clickHandler(item)}}> {dropItem.name}</Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
-            ))}
+    <Row>
+      {/* Left Sidebar */}
+      <Col md={3} lg={2} className="left-sidebar">
+        <div className="left-sidebar-container">
+          <div className="arrow-icon"></div>
+          <div className="search-container">
+          <h1 className="main-title" style={{marginTop: "-1rem", marginBottom:"3rem", fontSize:"28px"}}>FuturEssentials</h1>
+
+            {arr.map((item, i) => (
+                <Dropdown key={i} className="dropdown">
+                  <Dropdown.Toggle variant="secondary" block>
+                    {item.name}
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {item.items.map((dropItem, ind) => (
+                      <Dropdown.Item key={ind} onClick={() => {dropItem.clickHandler(item)}}> {dropItem.name}</Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              ))}
+          </div>
         </div>
-      </div>
-    </Col>
+      </Col>
+  
+      {/* Main Content */}
+      <Col md={6} lg={8} className="main-content">
+  <div className="main-content-container">
+    <Button variant="light" id="download" className="reset-btn" style={{marginRight:"31rem"}}>Download</Button>
+    <Button variant="light" id="delete" className="delete-btn">Delete</Button>
+          
+    <hr className="main-hr" />
+    <h1 className="main-title">Reinvent Your Space with Innovative Furniture Components!</h1>
+    <div id="scene" className="scene-container"> <canvas className="webgl"  ></canvas> </div>
+    <button className='keys' id='moveLeft'>←</button>
+    <button className='keys' id='moveRight'>→</button>
+    <button className='keys' id='moveDown'>↓</button>
+    <button className='keys' id='moveUp'>↑</button>
+    <button  className='keys' id='rotateLeft'>⟲</button>
+    <button  className='keys' id='rotateRight'>⟳</button>
+  </div>
+</Col>
 
-    {/* Main Content */}
-    <Col md={6} lg={8} className="main-content">
-      <div className="main-content-container">
-        <Button variant="light" id="download" className="reset-btn">Download</Button>
-        <Button variant="light" id="delete" className="delete-btn">Delete</Button>
-        <hr className="main-hr" />
-        <h1 className="main-title">Main Content</h1>
-        <div id="scene" className="scene-container"> <canvas className="webgl"  ></canvas> </div>
-      </div>
-    </Col>
+  
+      {/* Right Sidebar */}
+      <Col md={3} lg={2} className="right-sidebar">
+                  <h1 className="main-title" style={{marginTop: "1rem", marginBottom:"3rem", fontSize:"30px"}}>Choose Wisely</h1>
 
-    {/* Right Sidebar */}
-    <Col md={3} lg={2} className="right-sidebar">
-      <div className="right-sidebar-container">
-        <h1>Walls Color</h1>
-        <hr className="right-hr" />
-        <InputGroup className="right-input-group">
-          <InputGroup.Text>Color:</InputGroup.Text>
-          <Form.Control type="color" defaultValue="#ffffff"  id="color-picker-wall" />
-        </InputGroup>
-        <h1>Roof Color</h1>
-        <hr className="right-hr" />
-        <InputGroup className="right-input-group">
-          <InputGroup.Text>Color:</InputGroup.Text>
-          <Form.Control type="color" defaultValue="#ffffff"  id="color-picker-roof" />
-        </InputGroup>
-        <h1>Objects Color</h1>
-        <hr className="right-hr" />
-        <InputGroup className="right-input-group">
-          <InputGroup.Text>Color:</InputGroup.Text>
-          <Form.Control type="color" defaultValue="#ffffff"  id="color-picker-object" />
-        </InputGroup>
-        <h1>Floor Color</h1>
-        <hr className="right-hr" />
-        <InputGroup className="right-input-group">
-          <InputGroup.Text>Color:</InputGroup.Text>
-          <Form.Control type="color" defaultValue="#ffffff"  id="color-picker-floor" />
-        </InputGroup>
-      </div>
-    </Col>
-  </Row>
-</Container>
+        <div style={{marginBottom:"-5rem",marginTop:"-5rem" }}>
+       
+          <h1 style={{marginBottom:"0rem", marginTop:"5rem",  marginLeft:"-3rem"}}>Walls Color</h1>
+          <InputGroup className="right-input-group">
+            <InputGroup.Text>Color:</InputGroup.Text>
+            <Form.Control type="color" defaultValue="#ffffff"  id="color-picker-wall" />
+          </InputGroup>
+          </div>
+        <div style={{marginBottom:"-3rem",marginTop:"3rem" }}>
+           <h1 style={{marginBottom:"0rem", marginTop:"5rem",  marginLeft:"-3rem"}}>Roof Color</h1>
+          <InputGroup className="right-input-group">
+            <InputGroup.Text>Color:</InputGroup.Text>
+            <Form.Control type="color" defaultValue="#ffffff"  id="color-picker-roof" />
+          </InputGroup>
+          </div> 
+          <div style={{marginBottom:"0rem", marginTop:"3rem"}}>
+
+          <h1 style={{marginBottom:"0rem", marginTop:"3rem", marginLeft:"-3rem"}}>Floor Color</h1>
+          <InputGroup className="right-input-group">
+            <InputGroup.Text>Color:</InputGroup.Text>
+            <Form.Control type="color" defaultValue="#ffffff"  id="color-picker-floor" />
+
+          </InputGroup>
+    
+          </div>
+      </Col>
+    </Row>
+  </Container>
+  
+  
 
 
   

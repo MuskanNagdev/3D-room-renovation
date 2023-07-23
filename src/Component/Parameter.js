@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './Parameter.css';
-import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Parameter() {
   const [shape, setShape] = useState('square');
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +18,7 @@ function Parameter() {
       localStorage.setItem('shape', shape);
       localStorage.setItem('width', parsedWidth);
       localStorage.setItem('height', parsedHeight);
-      window.location.href = "/CustomDesign";
+      navigate('/CustomDesign');
     }
   }
 

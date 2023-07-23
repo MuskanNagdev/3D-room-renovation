@@ -30,18 +30,18 @@ function Designer() {
 
   const loggedIn = UseAuth();
 
-  if (loggedIn === false) {
+  // if (loggedIn === false) {
     
     
-    return <div><h1 style={{fontSize: "3rem", color: "#333", textAlign: "center", margin: "2rem"}}><u>
-    Please Login First
-    </u></h1>
-    <NavLink to="/Register">
+  //   return <div><h1 style={{fontSize: "3rem", color: "#333", textAlign: "center", margin: "2rem"}}><u>
+  //   Please Login First
+  //   </u></h1>
+  //   <NavLink to="/Register">
 
-    <button style={{fontSize: "2rem", color: "#fff", textAlign: "center", margin: "1.5rem", marginLeft:"37rem"}}>Click here </button>
-  </NavLink></div>
+  //   <button style={{fontSize: "2rem", color: "#fff", textAlign: "center", margin: "1.5rem", marginLeft:"37rem"}}>Click here </button>
+  // </NavLink></div>
   
-  }
+  // }
   return (
     <div className="admin-container">
       <h2>Contact Form For Admin</h2>

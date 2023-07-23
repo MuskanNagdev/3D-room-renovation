@@ -40,11 +40,11 @@ function OptionsDesign() {
           </li></NavLink>
           <NavLink to="/settings">  <li>
             <FontAwesomeIcon icon={faHome} />
-            <NavLink to="/Home">  <span>Home</span></NavLink>
+            <NavLink to="/">  <span>Home</span></NavLink>
           </li></NavLink>
           <NavLink to="/settings">   <li>
             <FontAwesomeIcon icon={faQuestionCircle} />
-            <NavLink to="/help"> <span>Help</span> </NavLink>
+            <NavLink to="/Tutorial"> <span>Help</span> </NavLink>
           </li></NavLink>
           <NavLink to="/settings"> <li>
             <FontAwesomeIcon icon={faPalette} />
@@ -56,12 +56,12 @@ function OptionsDesign() {
     </div>
         <div className="option">
           <img className="option-image" src={Room1} alt="Option 1" />
-          <p className="option-info">Create a beautiful living space with our Room 1 design.</p>
+          <p className="option-info">Create a beautiful living space with our Room design.</p>
           <NavLink to="/Portfolio"><button className="option-button">Portfolio</button></NavLink>
         </div>
         <div className="option">
           <img className="option-image" src={Room2} alt="Option 2" />
-          <p className="option-info">Create a beautiful work environment with our Room 2 design.</p>
+          <p className="option-info">Create a beautiful work environment with our Room design.</p>
           <NavLink to="/Parameter"><button className="option-button">Create Design</button></NavLink>
         </div>
       </div>

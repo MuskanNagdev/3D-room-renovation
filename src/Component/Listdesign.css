@@ -49,9 +49,10 @@ i {
 .navbar-mainbg {
   background-color: #5f394e;
   padding: 3px;
-  height: 55px;
+  height: 65px;
   width: 1350px;
   margin-right: 5rem;
+  margin-top: -1rem;
 
 
 
@@ -147,7 +148,7 @@ top:auto;
   content: '';
   position: absolute;
   width: 50px;
-  height: 60px;
+  height: 50px;
   border-radius: 50%;
   background-color: #5f394e;
 }
@@ -220,6 +221,78 @@ cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
 
+/* Add this style to make the side popup appear at the right side of the screen */
+/* .side-popup {
+  position: fixed;
+  top: 15rem;
+  right: 0;
+  width: 200px;
+  height: 17rem;
+  background-color: #ffffff;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-right: 10.5rem;
+  z-index: 999;
+  border-radius: 20px;
+} */
+
+/* Add this style to make the side popup appear at the right side of the screen */
+/* CSS Styles for Side Popup */
+.side-popup {
+  position: fixed;
+  width: 9rem;
+  height: 15srem;
+  top: 50%;
+
+  right: 20px;
+  margin-top: -15rem;
+  transform: translateY(-50%);
+  background-color: #f9f9f9; /* Beautiful background color */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Beautiful box shadow */
+  padding: 20px;
+  z-index: 999;
+  padding-left: 1.5rem;
+  padding-top: -3rem;
+  margin-right: 9.25rem;
+  border-radius: 20px; /* Beautiful border radius */
+}
+
+/* Style for the Help buttons */
+.helpbuttons {
+  width: 6rem;
+  height: 4rem;
+  border: none;
+  color: #333; /* Beautiful text color */
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 20px;
+  margin-bottom: -0.02rem;
+  background-color: #fff; /* Beautiful button background color */
+  border: 1px solid #e1e1e1; /* Beautiful button border */
+  padding-top: -1rem;
+  padding-right: 1rem;
+  padding-bottom: -3rem;
+  margin-left: 0rem;
+}
+
+.helpbuttons:hover {
+  background-color: #f1f1f1; /* Beautiful button hover background color */
+}
+
+/* Style for the Close button */
+.helpbuttons.close {
+  background-color: #ff6b6b;
+  color: #ffffff;
+}
+
+.helpbuttons.close:hover {
+  background-color: #e05f5f;
+}
+
+
+
+
 .dropdown-menu.show {
   transform: translateY(0);
   opacity: 1;
@@ -242,8 +315,8 @@ cursor: pointer;
 }
 
 .dropdown-item:hover {
-  background-color: #91a4c4;
-  color: #fff;
+  background-color: #2359b8;
+  color: #000000;
 }
 
 
