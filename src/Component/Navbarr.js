@@ -25,11 +25,8 @@ const Navbar = () => {
   };
   const handleDropdownToggle = () => {
     // Toggle dropdown only if the user is logged in
-    if (!isLoggedIn) {
-      alert("You must log in first.");
-    } else {
-      // Toggle the dropdown if the user is logged in
-      handleDropdownToggle();
+    if (isLoggedIn) {
+      setIsDropdownOpen(!isDropdownOpen);
     }
   };
 
@@ -122,14 +119,20 @@ const Navbar = () => {
     // Handle the selected option from the help popup
     switch (option) {
       case 'hire_designer':
+        navigate('/contact');
+
         // Handle selecting the "Hire Designer" option
         // Implement the functionality here
         break;
       case 'watch_tutorial':
+        navigate('/tuotoria');
+
         // Handle selecting the "Watch Tutorial" option
         // Implement the functionality here
         break;
-      
+        case 'follow_instruction':
+        navigate('/instruction');
+                              
       default:
         break;
     }
